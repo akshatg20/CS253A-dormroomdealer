@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #B8E2F2;
+    }
+
+    select {
+        font-family: 'Barlow Semi Condensed', sans-serif;
+        font-size: 16px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        width: 200px;
+        margin-right: 10px;
+    }
+
+    label {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #3e8e41;
+    }
+</style>
+<div class="container">
+    <form method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+        <label for="category">SELECT CATEGORY:</label>
+        <select name="category" id="category">
+            <option value="All categories">All categories</option>
+            <option value="Cycle">Cycle</option>
+            <option value="Cooler">Cooler</option>
+            <option value="Heater">Heater</option>
+            <option value="Laptop">Laptop</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Others">Others</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+
+    <h2 class="text-center my-4">Live Bids</h2>
+    <hr>
+    </hr>
+    <div class="row justify-content-center">
+        {% for i in items %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{{ i.profile.url }}" alt="{{ i.name }}">
+                <div class="card-footer text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Product : {{ i.name }}</h5>
+                        <h5 class="mb-0">Current Price: ₹ {{ i.currentPrice }}</h5>
+                    </div>
+                    <a href="items/biditem?id={{ i.id }}" class="btn btn-primary">View and Bid</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

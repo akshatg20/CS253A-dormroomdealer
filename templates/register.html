@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Dorm Room Dealer</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="contact-box">
+                <div class="left"></div>
+                <div class="right">
+                <form action="/register" method="POST">{% csrf_token %}
+                    <h2>Register</h2>
+                    <input type="text" class="field" placeholder="First Name" name="firstname" required>
+                    <input type="text" class="field" placeholder="Last Name" name="lastname" required>
+                    <input type="text" class="field"  placeholder="Contact Number" pattern="[1-9][0-9]{9}" name="contact" required>
+                    <input type="text" class="field" placeholder="Username" name="username" required>
+                    <input type="email" class="field" placeholder="Email-ID" name="email" required>
+                    <input type="password" class="field" placeholder="Enter Password" name="p1" required>
+                    <input type="password" class="field" placeholder="Re Enter Password" name="p2" required>
+                    <input type="submit" class="btn" value="Submit">
+                    <input type="reset" class="btn" value="Reset">
+                </form>
+                </div>
+                {% for m in messages %}
+			<center><font color="red"><h2>{{m}}</h2></font></center>
+		{% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

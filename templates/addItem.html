@@ -1,0 +1,160 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+  <style>
+    body {
+      background-color: #B8E2F2;
+    }
+
+    .container {
+      margin: 0 auto;
+      max-width: 900px;
+      padding: 20px;
+    }
+
+    form {
+      margin: 0 auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+    }
+
+    th {
+      background-color: #555;
+      color: white;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="datetime-local"],
+    input[type="file"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid #555;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+    }
+
+  </style>
+
+    <div class="container">
+        <form action="additem" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th colspan="2">Add Item</th>
+                </tr>
+                <tr>
+                    <td>Item name:</td>
+                    <td><input type="text" name="iname" placeholder="Enter item name" required></td>
+                </tr>
+                <tr>
+                    <td>Profile image:</td>
+                    <td><input type="file" name="img" accept="image/*" required></td>
+                </tr>
+                <tr>
+                    <td>Optional image1:</td>
+                    <td><input type="file" name="img1" accept="image/*"></td>
+                </tr>
+                <tr>
+                    <td>Optional image2:</td>
+                    <td><input type="file" name="img2" accept="image/*"></td>
+                </tr>
+                <tr>
+                    <td>Optional image3:</td>
+                    <td><input type="file" name="img3" accept="image/*"></td>
+                </tr>
+                <tr>
+                    <td>Optional image4:</td>
+                    <td><input type="file" name="img4" accept="image/*"></td>
+                </tr>
+                <tr>
+                    <td>Tag:</td>
+                    <td><input type="text" name="itag" placeholder="Enter item tag" required></td>
+                </tr>
+                <tr>
+                    <td>Short description:</td>
+                    <td><input type="text" name="sdis" maxlength="50" placeholder="Enter Short Description" required></td>
+                </tr>
+                <tr>
+                    <td>Long description:</td>
+                    <td><textarea rows="5" cols="50" name="ldis" placeholder="Enter Long Description"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Set base price:</td>
+                    <td><input type="text" name="iprice" placeholder="Enter price in numbers" required></td>
+                </tr>
+                <tr>
+                    <td>Auction Start date :</td>
+                    <td><input type="datetime-local" name="s_date" class="field" required></td> 
+                </tr> 
+                <tr>
+                    <td>Auction End date :</td>
+                    <td><input type="datetime-local" name="e_date" class="field" required></td> 
+                </tr> 
+                <tr>
+                    <td colspan= "2" align: "center">
+                        <font color="black">
+                            <input type="submit" class="btt third" value="Upload" style="color: black;">
+                        </font>
+                    </td>
+                </tr>
+                
+            </form>    
+            <tr>
+                <td>{% for m in messages %}
+                    <center>
+                        <font color="red">
+                            <h2>{{m}}</h2>
+                        </font>
+                    </center>
+                    {% endfor %}
+                </td>
+                <td></td>
+            </tr>
+            </table>
+    
+            </center>
+        </div>
+    {% endblock %}          
+
+
+
+
+
+
