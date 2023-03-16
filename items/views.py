@@ -28,7 +28,7 @@ def additem(request):
         else:
             return render(request,"notification2.html")
     else:
-        return render(request,'additem.html')
+        return render(request,'addItem.html')
     
     
 @login_required(login_url='login')
