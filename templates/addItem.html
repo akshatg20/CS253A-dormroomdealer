@@ -104,9 +104,20 @@
                     <td><input type="file" name="img4" accept="image/*"></td>
                 </tr>
                 <tr>
-                    <td>Tag:</td>
-                    <td><input type="text" name="itag" placeholder="Enter item tag" required></td>
-                </tr>
+                  <td>Tag:</td>
+                  <td>
+                      <select name="itag" required>
+                          <option value="">Select item tag</option>
+                          <option value="Cycle">Cycle</option>
+                          <option value="Cooler">Cooler</option>
+                          <option value="Heater">Heater</option>
+                          <option value="Laptop">Laptop</option>
+                          <option value="Mobile">Mobile</option>
+                          <option value="Others">Others</option>
+                      </select>
+                  </td>
+              </tr>
+              
                 <tr>
                     <td>Short description:</td>
                     <td><input type="text" name="sdis" maxlength="50" placeholder="Enter Short Description" required></td>
