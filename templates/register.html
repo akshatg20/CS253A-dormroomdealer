@@ -32,39 +32,6 @@
     </body>
 </html> -->
 
-<!-- <!DOCTYPE html>
-<html>
-    <head>
-        <title>The Dorm Room Dealer</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <div class="contact-box">
-                <div class="left"></div>
-                <div class="right">
-                <form action="/register" method="POST">{% csrf_token %}
-                    <h2>Register</h2>
-                    <input type="text" class="field" placeholder="First Name" name="fname" required>
-                    <input type="text" class="field" placeholder="Last Name" name="lname" required>
-                    <input type="text" class="field"  placeholder="Contact Number" pattern="[1-9][0-9]{9}" name="contact" required>
-                    <input type="text" class="field" placeholder="Username" name="name" required>
-                    <input type="email" class="field" placeholder="Email-ID" name="email" required>
-                    <input type="password" class="field" placeholder="Enter Password" name="p1" required>
-                    <input type="password" class="field" placeholder="Re Enter Password" name="p2" required>
-                    <input type="submit" class="btn" value="Submit">
-                    <input type="reset" class="btn" value="Reset">
-                </form>
-                </div>
-                {% for m in messages %}
-			<center><font color="red"><h2>{{m}}</h2></font></center>
-		{% endfor %}
-            </div>
-        </div>
-    </body>
-</html> -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -79,7 +46,9 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./../static/css/register2.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./../static/css/login.css" />
   </head>
 
   <body>
@@ -88,11 +57,11 @@
     <nav class="navbar navbar-light justify-content-between">
       <a class="ml-5 navbar-brand">
         <img
-          src="https://i.pinimg.com/originals/67/69/bb/6769bbdfd658b026566bd5e6ca924ad7.png"
-          class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3 mr-2"
-          style="width: 40px"
+          src="/static/img/logo.png"
+          class="img-fluid  rounded-circle my-3 mr-2"
+          style="width: 80px"
           alt="profile"
-        />DRD : The Dorm Room Dealers</a
+        />DRD : THE DORM ROOM DEALER</a
       >
       
     </nav>
@@ -101,7 +70,7 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="card form-card my-5">
-            <h2 class="text-center text-primary mt-5">Sign Up</h2>
+            <h2 class="text-center text-primary mt-5">SIGN UP</h2>
 
             <form
               class="card-body cardbody-color p-lg-5"
@@ -111,12 +80,7 @@
               {% csrf_token %}
 
               <div class="text-center">
-                <img
-                  src="https://i.pinimg.com/originals/67/69/bb/6769bbdfd658b026566bd5e6ca924ad7.png"
-                  class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
-                  width="200px"
-                  alt="profile"
-                />
+                <img src="/static/img/logo.png"  width="400px" alt="profile"/>
               </div>
 
               <div class="mb-3">
@@ -169,16 +133,12 @@
               </div>
               
               <div class="mb-3">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  placeholder="password"
-                  name="p1" required
-                />
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" onclick="var passwordField = document.getElementById('password'); if (passwordField.type === 'password') { passwordField.type = 'text'; } else { passwordField.type = 'password'; }">Show</button>
+                <div class="input-group">
+                  <input type="password" class="form-control" id="password" placeholder="password" name="p1" required/>
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" onclick="var passwordField = document.getElementById('password'); if (passwordField.type === 'password') { passwordField.type = 'text'; } else { passwordField.type = 'password'; }">Show</button>
                   </div>
+                </div>  
               </div>
               
 
@@ -208,3 +168,4 @@
     </div>
   </body>
 </html>
+
