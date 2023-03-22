@@ -39,6 +39,43 @@
     button:hover {
         background-color: #3e8e41;
     }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        background-color: transparent;
+        overflow-x: scroll;
+        width: 100%;
+    }
+
+    .pagination a, .pagination span {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 0 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 14px;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        background-color: black;
+    }
+
+    .pagination a:hover {
+        background-color: #f2f2f2;
+    }
+
+    .pagination .current {
+        font-weight: bold;
+    }
+
+    .pagination a.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
 </style>
 <div class="container">
     <form method="POST" action="{% url 'home' %}">
@@ -60,7 +97,7 @@
     <hr>
     </hr>
     <div class="row justify-content-center">
-        {% for i in items %}
+        {% for i in page_obj %}
         <div class="col-md-4 mb-4">
             <div class="card">
                 <img class="card-img-top" src="{{ i.profile.url }}" alt="{{ i.name }}">
@@ -75,5 +112,22 @@
         </div>
         {% endfor %}
     </div>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </span>
 </div>
 {% endblock %}

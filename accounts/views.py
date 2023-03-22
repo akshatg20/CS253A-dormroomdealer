@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from datetime import datetime
 from django.utils import timezone
 import datetime
+from django.core.paginator import Paginator
 
 # function to implement the login facility
 def login(request):
@@ -116,7 +117,6 @@ def productStatus(request):
         except:
             pass
 
-# Need to correct the below code
 # helper function to send mails
 @login_required(login_url='login')
 def sendMail(request):
@@ -169,6 +169,8 @@ def sendMail(request):
 # function to implement the home page of the application, which will show the live bids
 @login_required(login_url='login')
 def home(request):
+
+    # creating a category search on the top of the home page
     if request.method == "POST":
         category = request.POST.get('category')
     else:    
@@ -176,7 +178,8 @@ def home(request):
 
     items = Item.objects.all()
     today = timezone.now()
-  
+    
+    # assigning status to each product
     for i in items:
 
         # if item start_date not mentioned , we take today as the default value
@@ -201,7 +204,15 @@ def home(request):
     else:
         items = Item.objects.filter(status="live")
 
-    return render(request,"home.html",{'items':items})
+    # paginating
+    
+    # product_list = Item.objects.all()
+    paginator = Paginator(items, 6) # Show 6 products per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)    
+
+    return render(request,"home.html",{'page_obj': page_obj})
 
 
 # This function mainains a log of the user's history with the application
