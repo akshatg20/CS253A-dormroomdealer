@@ -88,12 +88,6 @@ def myprofile(request):
         contact = i.contact
     return render(request,"myprofile.html",{"details":details,"contact":contact})
 
-# function to display the item data on the future auctions page
-@login_required(login_url='login')
-def future(request):
-    items = Item.objects.filter(status="future")
-    return render(request,"future.html",{"items":items})
-
 # helper function to update the current status of items on the application
 @login_required(login_url='login')
 def productStatus(request):
@@ -205,14 +199,15 @@ def home(request):
         items = Item.objects.filter(status="live")
 
     # paginating
-    
-    # product_list = Item.objects.all()
     paginator = Paginator(items, 6) # Show 6 products per page.
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)    
 
-    return render(request,"home.html",{'page_obj': page_obj})
+    # adding future auctions
+    itemsfuture = Item.objects.filter(status="future")
+
+    return render(request,"home.html",{'page_obj': page_obj, 'items': itemsfuture})
 
 
 # This function mainains a log of the user's history with the application

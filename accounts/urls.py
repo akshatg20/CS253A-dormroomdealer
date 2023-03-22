@@ -13,7 +13,6 @@ urlpatterns = [
     path('logout',views.logout,name="logout"),
     path('items/logout',views.ilogout,name="ilogout"),
     path('myprofile',views.myprofile,name="myprofile"),
-    path('future',views.future,name="future"),
     path('dashboard',views.dashboard,name="dashboard"),
     
     # forgot   
