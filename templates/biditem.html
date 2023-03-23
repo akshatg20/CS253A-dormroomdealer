@@ -91,7 +91,7 @@
                 <tr>
                 <form action="successfullBid">
                     <td>Entre Amount for Bid :<input type="hidden" name="iid" value={{item.id}}></td>
-                    <td><input type="number" name="bidrs" class="field" placeholder="Enter your amount" min={{item.currentPrice}}></td>
+                    <td><input type="number" name="bidrs" class="field" placeholder="Enter your amount" min={{item.currentPrice}} max="4294967295"></td>
                 </tr> <tr><td></td><td>
                     <input type="submit" class="btt third" value="Bid now">
                     </form></td></tr>
