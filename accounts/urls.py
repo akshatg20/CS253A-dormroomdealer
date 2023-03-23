@@ -14,6 +14,7 @@ urlpatterns = [
     path('items/logout',views.ilogout,name="ilogout"),
     path('myprofile',views.myprofile,name="myprofile"),
     path('dashboard',views.dashboard,name="dashboard"),
+    path('edit_profile/', views.edit_profile, name='edit_profile'),
     
     # forgot   
     path('password-reset/',

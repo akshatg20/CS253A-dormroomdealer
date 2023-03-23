@@ -5,4 +5,5 @@ from django.db import models
 class Detail(models.Model):
     username=models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
+    profile=models.ImageField(upload_to='pics',null=True )
     

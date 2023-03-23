@@ -36,7 +36,7 @@ def register(request):
         mail = request.POST['email']
         p1 = request.POST['p1']
         p2 = request.POST['p2']
-
+        profile = request.FILES.get('profile')
         contact = request.POST['contact']
         if p1 == p2:
             if User.objects.filter(email=mail).exists():
@@ -48,7 +48,7 @@ def register(request):
             else:
                 user = User.objects.create_user(first_name=firstname,last_name=lastname,email=mail,password=p1,username=username)
                 user.save()
-                obj = Detail(username=username,contact=contact)
+                obj = Detail(username=username,contact=contact,profile = profile)
                 obj.save()
                 subject = "The Dorm Room Dealer"  
                 msg     = "Succesfull Registration!"
@@ -281,8 +281,10 @@ def dashboard(request):
 
     obj3 = Detail.objects.filter(username=username)
     contact = ""
+    profile = ""
     for i in obj3:
         contact = i.contact
+        profile = i.profile
 
 
     # Setting up the user items history information
@@ -296,5 +298,32 @@ def dashboard(request):
     pitem = Item.objects.filter(ownermail = mail).filter(status="past")
     litem = Item.objects.filter(ownermail = mail).filter(status="live")
     fitem = Item.objects.filter(ownermail = mail).filter(status="future")
-    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddeditem": biddeditem, "details":details,"contact":contact})
+    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddeditem": biddeditem, "details":details,"contact":contact, "profile":profile})
+
+
+# function to allow user to edit their details
+@login_required(login_url='login')
+def edit_profile(request):
+    if request.method == 'POST':
+        # update the user's details
+        user = request.user
+        user.first_name = request.POST.get('firstname')
+        user.last_name = request.POST.get('lastname')
+        user.email = request.POST.get('email')
+        user.save()
+        
+        # update the user's detail model
+        detail = Detail.objects.get(username=user.username)
+        detail.contact = request.POST.get('contact')
+        detail.profile = request.FILES.get('profile')
+        detail.save()
+        
+        messages.success(request, 'Profile updated successfully!')
+        return redirect('dashboard')
+        
+    else:
+        # render the edit form
+        user = request.user
+        detail = Detail.objects.get(username=user.username)
+        return render(request, 'edit_profile.html', {'user': user, 'detail': detail})
 
