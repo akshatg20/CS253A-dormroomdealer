@@ -152,15 +152,21 @@
     const bidButton = document.querySelector('#bid-button');
 
     // Add a click event listener to the button
-    bidButton.addEventListener('click', () => {
+    bidButton.addEventListener('click', (event) => {
+        // Prevent the default form submission
+        event.preventDefault();
+
         // When the button is clicked, show a confirmation pop-up
         const confirmBid = window.confirm('Are you sure you want to place a bid?');
 
         // Check if the user clicked "OK" in the confirmation pop-up
         if (confirmBid) {
-            // If the user confirmed the bid, do something (e.g. submit a form)
+            // If the user confirmed the bid, submit the form
+            const form = document.querySelector('form');
+            form.submit();
+
+            // Log a message to the console
             console.log('Bid confirmed!');
-            // Here you can add your code to submit the bid
         } else {
             // If the user cancelled the bid, do nothing
             console.log('Bid cancelled.');
