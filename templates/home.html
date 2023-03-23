@@ -50,7 +50,8 @@
         width: 100%;
     }
 
-    .pagination a, .pagination span {
+    .pagination a,
+    .pagination span {
         display: inline-block;
         padding: 10px 15px;
         margin: 0 5px;
@@ -100,7 +101,7 @@
         {% for i in page_obj %}
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img class="card-img-top" src="{{ i.profile.url }}" alt="{{ i.name }}">
+                <img class="card-img-top" id="item-image" src="{{ i.profile.url }}" alt="{{ i.name }}">
                 <div class="card-footer text-center">
                     <div class="card-body">
                         <h5 class="card-title">Product : {{ i.name }}</h5>
@@ -117,8 +118,8 @@
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; First</a>
-            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        <a href="?page=1">&laquo; First</a>
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
         {% endif %}
 
         <span class="current">
@@ -126,32 +127,35 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
         {% endif %}
     </span>
 </div>
 
 <div class="container">
     <h2 class="text-center my-4">Future Auctions</h2>
-    <hr></hr>
+    <hr>
+    </hr>
     <div class="row justify-content-center">
         {% for i in items %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="{{ i.profile.url }}" alt="{{ i.name }}">
-                    <div class="card-footer">
-                        <div class="card-body">
-                            <h5 class="card-title">Product : {{ i.name }}</h5>
-                            <h5 class="mb-0">Base Price: ₹ {{ i.basePrice }}</h5>    
-                            <h5 class="mb-0">Auction Start Date : {{i.start_date}}</h5>  
-                            <h5 class="mb-0">Auction End Date : {{i.end_date}}</h5>  
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img class="card-img-top" id="item-image" src="{{ i.profile.url }}" alt="{{ i.name }}">
+                <div class="card-footer">
+                    <div class="card-body">
+                        <h5 class="card-title">Product : {{ i.name }}</h5>
+                        <h5 class="mb-0">Base Price: ₹ {{ i.basePrice }}</h5>
+                        <h5 class="mb-0">Auction Start Date : {{i.start_date}}</h5>
+                        <h5 class="mb-0">Auction End Date : {{i.end_date}}</h5>
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
+<!-- <script src="/static/js/img-zoom.js"></script> -->
+
 {% endblock %}

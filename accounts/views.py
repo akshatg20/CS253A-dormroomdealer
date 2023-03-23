@@ -293,12 +293,13 @@ def dashboard(request):
     id = user.id
     item_obj = Item.objects.filter(highest_bidder = id)
 
-    biddeditem = item_obj
+    biddedlive = item_obj.filter(status = "live")
+    biddedpast = item_obj.filter(status = "past")
 
     pitem = Item.objects.filter(ownermail = mail).filter(status="past")
     litem = Item.objects.filter(ownermail = mail).filter(status="live")
     fitem = Item.objects.filter(ownermail = mail).filter(status="future")
-    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddeditem": biddeditem, "details":details,"contact":contact, "profile":profile})
+    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddedlive": biddedlive,"biddedpast":biddedpast, "details":details,"contact":contact, "profile":profile})
 
 
 # function to allow user to edit their details
