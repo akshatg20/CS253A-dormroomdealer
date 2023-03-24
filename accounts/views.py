@@ -33,11 +33,14 @@ def register(request):
         firstname=request.POST['firstname']
         lastname=request.POST['lastname']
         username = request.POST['username']
+        # rollno = request.POST['email']
+        # mail = rollno + "@iitk.ac.in"
         mail = request.POST['email']
         p1 = request.POST['p1']
         p2 = request.POST['p2']
         profile = request.FILES.get('profile')
         contact = request.POST['contact']
+        hall = request.POST['hall']
         if p1 == p2:
             if User.objects.filter(email=mail).exists():
                 messages.info(request,"User with this Email already exits")
@@ -48,7 +51,7 @@ def register(request):
             else:
                 user = User.objects.create_user(first_name=firstname,last_name=lastname,email=mail,password=p1,username=username)
                 user.save()
-                obj = Detail(username=username,contact=contact,profile = profile)
+                obj = Detail(username=username,contact=contact,profile = profile,hall = hall)
                 obj.save()
                 subject = "The Dorm Room Dealer"  
                 msg     = "Succesfull Registration!"
@@ -282,9 +285,11 @@ def dashboard(request):
     obj3 = Detail.objects.filter(username=username)
     contact = ""
     profile = ""
+    hall = ""
     for i in obj3:
         contact = i.contact
         profile = i.profile
+        hall = i.hall
 
 
     # Setting up the user items history information
@@ -299,7 +304,7 @@ def dashboard(request):
     pitem = Item.objects.filter(ownermail = mail).filter(status="past")
     litem = Item.objects.filter(ownermail = mail).filter(status="live")
     fitem = Item.objects.filter(ownermail = mail).filter(status="future")
-    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddedlive": biddedlive,"biddedpast":biddedpast, "details":details,"contact":contact, "profile":profile})
+    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddedlive": biddedlive,"biddedpast":biddedpast, "details":details,"contact":contact, "profile":profile, "hall": hall})
 
 
 # function to allow user to edit their details
@@ -317,6 +322,7 @@ def edit_profile(request):
         detail = Detail.objects.get(username=user.username)
         detail.contact = request.POST.get('contact')
         detail.profile = request.FILES.get('profile')
+        detail.hall    = request.POST.get('hall')
         detail.save()
         
         # messages.success(request, 'Profile updated successfully!')

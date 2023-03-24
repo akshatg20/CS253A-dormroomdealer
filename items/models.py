@@ -7,10 +7,8 @@ class Item(models.Model):
     profile=models.ImageField(upload_to='pics')
     img1=models.ImageField(upload_to='pics' ,null=True )
     img2=models.ImageField(upload_to='pics' ,null=True )
-    img3=models.ImageField(upload_to='pics' ,null=True )
-    img4=models.ImageField(upload_to='pics' ,null=True )
-    short_description=models.CharField(max_length=50)
-    long_description=models.TextField()
+    description=models.TextField()
+    location = models.IntegerField(null = True)
     basePrice=models.IntegerField()
     currentPrice=models.IntegerField()
     

@@ -12,17 +12,15 @@ def additem(request):
             prof = request.FILES['img']
             img1 = request.FILES.get('img1')
             img2 = request.FILES.get('img2')
-            img3 = request.FILES.get('img3')
-            img4 = request.FILES.get('img4')
             itag = request.POST['itag']
-            sdisc = request.POST['sdis']
-            ldisc = request.POST['ldis']
+            disc = request.POST['disc']
             price = request.POST['iprice']
+            location = request.POST['location']
             sdate = request.POST['s_date']
             edate = request.POST['e_date']
             omail = request.user.email
 
-            item = Item(ownermail=omail,start_date=sdate,end_date=edate,currentPrice=price,img1=img1,img2=img2,img3=img3,img4=img4,name=iname,profile=prof,tag=itag,short_description=sdisc,long_description=ldisc,basePrice=price)
+            item = Item(ownermail=omail,start_date=sdate,end_date=edate,currentPrice=price,img1=img1,img2=img2,name=iname,profile=prof,tag=itag,description=disc,basePrice=price,location = location)
             item.save()
             return redirect("home")
         else:

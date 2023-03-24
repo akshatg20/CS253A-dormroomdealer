@@ -54,8 +54,8 @@
             </tr>
             <tr>
 
-                <td width="30%">Short Description : </td>
-                <td width="60%">{{item.short_description}}</td>
+                <td width="30%">Description : </td>
+                <td width="60%">{{item.description}}</td>
             </tr>
             <tr>
                 <td height="10px">
@@ -64,10 +64,6 @@
                 <td height="10px">
                     <hr>
                 </td>
-            </tr>
-            <tr>
-                <td>Long Description :</td>
-                <td>{{item.long_description}}</td>
             </tr>
             <tr>
                 <td height="10px">
@@ -79,7 +75,7 @@
             </tr>
             <tr>
                 <td>Base Price :</td>
-                <td>{{item.basePrice}}₹</td>
+                <td>₹{{item.basePrice}}</td>
             </tr>
             <tr>
                 <td height="10px">
@@ -91,7 +87,7 @@
             </tr>
             <tr>
                 <td>Current Price :</td>
-                <td>{{item.currentPrice}}₹</td>
+                <td>₹{{item.currentPrice}}</td>
             </tr>
             <tr>
                 <td height="10px">
@@ -102,7 +98,19 @@
                 </td>
             </tr>
             <tr>
-                <td>profile image :</td>
+                <td>Hall :</td>
+                <td>{{item.location}}</td>
+            </tr>   
+            <tr>
+                    <td height="10px">
+                        <hr>
+                    </td>
+                    <td height="10px">
+                        <hr>
+                    </td>
+            </tr> 
+            <tr>   
+                <td>Profile Image :</td>
                 <td><img src={{item.profile.url}} height="300" width="400"></td>
             </tr>
             <tr>
@@ -116,18 +124,6 @@
             <tr>
                 <td height="10px"></td>
                 <td height="10px"></td>
-            </tr>
-            <tr>
-                <td>{%if item.img3 %}<img src={{item.img3.url}} height="300" width="400"></td>{%endif%}
-                <td>{%if item.img4 %}<img src={{item.img4.url}} height="300" width="400"></td>{%endif%}
-            </tr>
-            <tr>
-                <td height="10px">
-                    <hr>
-                </td>
-                <td height="10px">
-                    <hr>
-                </td>
             </tr>
             <tr>
                 <form action="successfullBid">
