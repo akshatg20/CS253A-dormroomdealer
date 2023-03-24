@@ -37,9 +37,15 @@
 <div class="container-2">
 
     <div class="contact-box">
+        {% if profile %}
         <div class="left" >
             <img src="/media/{{profile}}" alt="Profile Picture">
         </div>
+        {% else %}
+        <div class="left" >
+            <img src="/static/img/profile.jpeg" alt="Profile Picture">
+        </div>
+        {% endif %}
         <div class="right">
             <h4>Name : {{details.first_name}} {{details.last_name}} </h4>
             <h4>Username : {{details.username}}</h4>

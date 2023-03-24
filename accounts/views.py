@@ -319,7 +319,7 @@ def edit_profile(request):
         detail.profile = request.FILES.get('profile')
         detail.save()
         
-        messages.success(request, 'Profile updated successfully!')
+        # messages.success(request, 'Profile updated successfully!')
         return redirect('dashboard')
         
     else:
