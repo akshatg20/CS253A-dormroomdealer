@@ -78,19 +78,6 @@ def ilogout(request):
     auth.logout(request)
     return redirect("login") 
 
-# function to implement the user information dashboard
-@login_required(login_url='login')
-def myprofile(request):
-    bidder = request.user
-    details = bidder
-    username = details.username
-
-    obj = Detail.objects.filter(username=username)
-    contact = ""
-    for i in obj:
-        contact = i.contact
-    return render(request,"myprofile.html",{"details":details,"contact":contact})
-
 # helper function to update the current status of items on the application
 @login_required(login_url='login')
 def productStatus(request):
