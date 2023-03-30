@@ -143,7 +143,7 @@
     </form>
 </div>
 
-<script>
+<!-- <script>
     // Find the "Bid Now" button element
     const bidButton = document.querySelector('#bid-button');
 
@@ -151,23 +151,37 @@
     bidButton.addEventListener('click', (event) => {
         // Prevent the default form submission
         event.preventDefault();
+        const bidInput = document.querySelector('input[name="bidrs"]');
+        const bidAmount = parseInt(bidInput.value);
 
         // When the button is clicked, show a confirmation pop-up
         const confirmBid = window.confirm('Are you sure you want to place a bid?');
 
-        // Check if the user clicked "OK" in the confirmation pop-up
-        if (confirmBid) {
-            // If the user confirmed the bid, submit the form
-            const form = document.querySelector('form');
-            form.submit();
+        if (bidAmount >= currentPrice) {
 
-            // Log a message to the console
-            console.log('Bid confirmed!');
-        } else {
-            // If the user cancelled the bid, do nothing
-            console.log('Bid cancelled.');
+            // Check if the user clicked "OK" in the confirmation pop-up
+            if (confirmBid) {
+                // If the user confirmed the bid, submit the form
+                const form = document.querySelector('form');
+                form.submit();
+
+                // Log a message to the console
+                console.log('Bid confirmed!');
+            } 
+            else {
+              // If the user cancelled the bid, do nothing
+              console.log('Bid cancelled.');
+            }
+        } 
+        else {
+            const errorText = document.createElement('p');
+            errorText.textContent = 'Bid amount must be greater than or equal to the current price.';
+            errorText.style.color = 'red';
+            bidForm.insertBefore(errorText, bidInput);
+            console.log('Bid cancelled.');   
+
         }
-    });
 
-</script>
+});
+</script> -->
 {% endblock %}
