@@ -308,8 +308,14 @@ def edit_profile(request):
         # update the user's detail model
         detail = Detail.objects.get(username=user.username)
         detail.contact = request.POST.get('contact')
-        detail.profile = request.FILES.get('profile')
-        detail.hall    = request.POST.get('hall')
+        if(request.FILES.get('profile')):
+            detail.profile = request.FILES.get('profile')
+        else:
+            detail.profile = detail.profile    
+        if(request.POST.get('hall')):  
+            detail.hall = request.POST.get('hall')
+        else:
+           detail.hall  = detail.hall         
         detail.save()
         
         # messages.success(request, 'Profile updated successfully!')
@@ -319,5 +325,14 @@ def edit_profile(request):
         # render the edit form
         user = request.user
         detail = Detail.objects.get(username=user.username)
+
+        # initial_values = {'firstname': user.first_name,
+        #           'lastname': user.last_name,
+        #           'email': user.email,
+        #           'contact': detail.contact,
+        #           'hall': detail.hall,
+        #           'profile': detail.profile}
+        
+        # form = EditProfileForm(initial=initial_values)
         return render(request, 'edit_profile.html', {'user': user, 'detail': detail})
 
