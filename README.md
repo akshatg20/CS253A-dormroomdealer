@@ -4,6 +4,7 @@ This repository is implementation of the course project CS253.
 python version >= 3.6.3
 ```python
 pip install django==3.0.3
+pip install Pillow
 ```
 # Installation
 ```bash
