@@ -52,6 +52,7 @@ def biditem(request):
 def successfullBid(request):
 
     value = request.GET.get('bidrs')
+    valueINT = int(value) 
     iid = request.GET.get('iid')
     bidder = request.user
     bidderEmail = bidder.email
@@ -70,5 +71,6 @@ def successfullBid(request):
         res     = send_mail(subject, msg, "notyourregularbidmaster@gmail.com", [to])
 
         Item.objects.filter(id=iid).update(currentPrice=value)
+        Item.objects.filter(id=iid).update(minBidPrice = str(valueINT + 1))
         Item.objects.filter(id=iid).update(highest_bidder=bidder.id)
         return redirect("home")

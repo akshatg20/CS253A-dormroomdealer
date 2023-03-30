@@ -11,6 +11,7 @@ class Item(models.Model):
     location = models.IntegerField(null = True)
     basePrice=models.IntegerField()
     currentPrice=models.IntegerField()
+    minBidPrice = models.IntegerField(null = True )
     
     tag=models.CharField(max_length=25)
     
