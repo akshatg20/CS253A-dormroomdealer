@@ -239,7 +239,7 @@ def dashboard(request):
             # Mail sent to the highest bidder
 
             subject = "The Dorm Room Dealer"  
-            msg     = "You have successfuly purchased " +item.name+"'s. Email-id of the seller is "+item.ownermail+". You can contact the seller for further informations at " +itemContact+ "."
+            msg     = "You have successfuly purchased " +item.name+". Email-id of the seller is "+item.ownermail+". You can contact the seller for further informations at " +itemContact+ "."
             to      = winnerEmail  
             res     = send_mail(subject, msg, "notyourregularbidmaster@gmail.com", [to])
             if res ==1:
