@@ -2,12 +2,19 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import Item
 from django.core.mail import send_mail  
+from datetime import datetime
 
 @login_required(login_url='login')
 def additem(request):
     if request.method == 'POST':
 
-        if request.POST['e_date'] >= request.POST['s_date']:
+        # check if the user is not setting an invalid start date and end date for the auction
+        sdate = request.POST['s_date']
+        edate = request.POST['e_date']
+        now = datetime.now()
+        now_str = now.strftime('%Y-%m-%d %H:%M:%S')
+
+        if (edate >= sdate and sdate >= now_str):
             iname = request.POST['iname']
             prof = request.FILES['img']
             img1 = request.FILES.get('img1')
@@ -16,8 +23,6 @@ def additem(request):
             disc = request.POST['disc']
             price = request.POST['iprice']
             location = request.POST['location']
-            sdate = request.POST['s_date']
-            edate = request.POST['e_date']
             omail = request.user.email
 
             item = Item(ownermail=omail,start_date=sdate,end_date=edate,currentPrice=price,img1=img1,img2=img2,name=iname,profile=prof,tag=itag,description=disc,basePrice=price,location = location)
