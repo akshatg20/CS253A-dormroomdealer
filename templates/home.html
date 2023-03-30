@@ -77,7 +77,71 @@
         opacity: 0.5;
     }
 
+    /* Responsive styles */
+
+    @media (max-width: 767px) {
+        /* Adjust styles for small screens */
+        select {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+
+        .pagination {
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 8px 12px;
+            margin: 0 2px;
+            font-size: 12px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        /* Adjust styles for medium screens */
+        select {
+            width: 300px;
+            margin-right: 10px;
+            margin-bottom: 0;
+        }
+
+        .pagination {
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 10px 14px;
+            margin: 0 3px;
+            font-size: 14px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        /* Adjust styles for large screens */
+        select {
+            width: 200px;
+            margin-right: 10px;
+            margin-bottom: 0;
+        }
+
+        .pagination {
+            overflow: hidden;
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 10px 15px;
+            margin: 0 5px;
+            font-size: 14px;
+        }
+    }
 </style>
+
 <div class="container">
     <form method="POST" action="{% url 'home' %}">
         {% csrf_token %}
