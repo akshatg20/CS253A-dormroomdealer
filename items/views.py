@@ -58,6 +58,7 @@ def successfullBid(request):
     bidderEmail = bidder.email
 
     item_obj = Item.objects.get(id=iid)
+    cpINT = int(item_obj.currentPrice)
 
     itemOwnerEmail = item_obj.ownermail
 
@@ -66,11 +67,11 @@ def successfullBid(request):
     else:
         mail = item_obj.ownermail
         subject = "The Dorm Room Dealer"  
-        msg     = "Your item was bidded by "+ bidder.email + ", at Rs" + value + "."
+        msg     = "Your item - " + item_obj.name + " was bidded by "+ bidder.email + ", at Rs" + value + "."
         to      = mail  
         res     = send_mail(subject, msg, "notyourregularbidmaster@gmail.com", [to])
 
-        Item.objects.filter(id=iid).update(currentPrice=value)
-        Item.objects.filter(id=iid).update(minBidPrice = str(valueINT + 1))
+        Item.objects.filter(id=iid).update(currentPrice=str(valueINT+1))
         Item.objects.filter(id=iid).update(highest_bidder=bidder.id)
+
         return redirect("home")

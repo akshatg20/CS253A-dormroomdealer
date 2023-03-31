@@ -105,7 +105,7 @@ def productStatus(request):
 @login_required(login_url='login')
 def sendMail(request):
     now = timezone.now()
-    item = Item.objects.filter(end_date = now ).filter(sold="sold").filter(sendwinmail="notSent")
+    item = Item.objects.filter(end_date__lte = now ).filter(sold="Sold").filter(sendwinmail="notSent")
     for i in item :
         try:
             # Selecting the attributes of the auction winner
@@ -128,7 +128,7 @@ def sendMail(request):
 
             # Mail sent to the highest bidder
             subject = "The Dorm Room Dealer"  
-            msg     = "You have successfuly purchased " + i.name + "'s. Email-id of the seller is " + i.ownermail + ". You can contact the seller for further informations at " + itemContact + "."
+            msg     = "You have successfuly purchased the item -  " + i.name + ". Email-id of the seller is " + i.ownermail + ". You can contact the seller for further informations at " + itemContact + "."
             to      = winnerEmail  
             res     = send_mail(subject, msg, "notyourregularbidmaster@gmail.com", [to])
             if res == 1:
@@ -138,7 +138,7 @@ def sendMail(request):
             
             # Mail sent to the seller
             subject = "The Dorm Room Dealer"  
-            msg     = "Your item " + i.name + "'s higgest bidder's email id is "+ winnerEmail + " . You can contact them for further informations at " + winnerContact + "."
+            msg     = "The email id of the highest bidder of your item - " + i.name + " is "+ winnerEmail + " . You can contact them for further informations at " + winnerContact + "."
             to      = i.ownermail  
             res     = send_mail(subject, msg, "notyourregularbidmaster@gmail.com", [to])
             if res ==1:
