@@ -13,6 +13,8 @@ class Detail(models.Model):
 class Notification(models.Model):
     message = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
+    # add a bool field to check if Notification has been seen
+    seen = models.BooleanField(default=False)
 
     def __str__(self):
         return self.message

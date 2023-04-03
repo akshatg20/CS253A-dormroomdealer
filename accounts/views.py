@@ -185,6 +185,15 @@ def sendMail(request):
 def home(request):
 
     show_notifications_link = True
+    user= request.user
+    notifications = user.notifications.all()
+    # check for how many notifications have field seen false
+    num_notifications =0
+    for notification in notifications:
+        if notification.seen == False:
+            num_notifications = num_notifications+1
+            # notification.save()
+    #  = len(notifications)
     # creating a category search on the top of the home page
     if request.method == "POST":
         category = request.POST.get('category')
@@ -228,7 +237,7 @@ def home(request):
     # adding future auctions
     itemsfuture = Item.objects.filter(status="future")
 
-    return render(request, "home.html", {'page_obj': page_obj, 'items': itemsfuture, 'show_notifications_link': show_notifications_link})
+    return render(request, "home.html", {'page_obj': page_obj, 'items': itemsfuture, 'show_notifications_link': show_notifications_link,"num_notifications":num_notifications})
 
 # function to implement notifications from the Customuser requesting for notifications. Show most recent 10 notifications
 
@@ -238,6 +247,11 @@ def notifications(request):
     user = request.user
     show_notifications_link = False
     notifications = user.notifications.all().order_by('-date')
+    # update the status of all notifications with field seen false to be true
+    for notification in notifications:
+        if notification.seen == False:
+            notification.seen = True
+            notification.save()
     notifications = notifications[:10]
     # console log all the notifications
     for notification in notifications:
@@ -253,7 +267,7 @@ def dashboard(request):
 
 
 
-    show_notifications_link= True
+    show_notifications_link= False
 
     # Checking if seller stopped the auction beforehand
     if request.method == 'POST':
