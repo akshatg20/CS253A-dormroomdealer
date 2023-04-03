@@ -79,7 +79,7 @@ def successfullBid(request):
         to = mail
         res = send_mail(
             subject, msg, "notyourregularbidmaster@gmail.com", [to])
-
+        itemUser.add_notification(msg)
         Item.objects.filter(id=iid).update(currentPrice=str(valueINT+1))
         Item.objects.filter(id=iid).update(highest_bidder=bidder.id)
 
