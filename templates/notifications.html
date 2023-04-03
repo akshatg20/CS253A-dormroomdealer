@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Recent Notifications</h1>
+  <ul>
+    {% for notification in notifications|slice:":10" %}
+      <li>{{ notification.message }} - {{ notification.date }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

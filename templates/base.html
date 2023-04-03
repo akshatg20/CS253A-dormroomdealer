@@ -56,6 +56,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
+                        <!-- write a nav-link for notifications with symbol for bell for the notifications-->
+                        {% if show_notifications_link %}
+                        <li class="nav-item">
+                        <a class="nav-link" href="/notifications">
+                            <i class="fa fa-bell"></i> Notifications
+                          </a>
+                    </li>
+                    {% endif %}
+                          
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">Logout</a>
                         </li>

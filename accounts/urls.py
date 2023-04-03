@@ -7,15 +7,17 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    path('',views.login,name="login"),
-    path('register',views.register,name="register"),
-    path('home',views.home,name="home"),
-    path('logout',views.logout,name="logout"),
-    path('items/logout',views.ilogout,name="ilogout"),
-    path('dashboard',views.dashboard,name="dashboard"),
+    path('', views.login, name="login"),
+    path('register', views.register, name="register"),
+    path('home', views.home, name="home"),
+    path('logout', views.logout, name="logout"),
+    path('items/logout', views.ilogout, name="ilogout"),
+    path('dashboard', views.dashboard, name="dashboard"),
+    path('notifications', views.notifications, name="notifications"),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
-    
-    # forgot   
+
+
+    # forgot
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
              template_name='commons/password-reset/password_reset.html',
@@ -38,5 +40,5 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(
              template_name='commons/password-reset/password_reset_complete.html'
          ),
-         name='password_reset_complete'),   
+         name='password_reset_complete'),
 ]

@@ -1,8 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Item
-from django.core.mail import send_mail  
+from django.core.mail import send_mail
 from datetime import datetime
+from accounts.models import CustomUser
+
 
 @login_required(login_url='login')
 def additem(request):
@@ -25,26 +27,27 @@ def additem(request):
             location = request.POST['location']
             omail = request.user.email
 
-            item = Item(ownermail=omail,start_date=sdate,end_date=edate,currentPrice=price,img1=img1,img2=img2,name=iname,profile=prof,tag=itag,description=disc,basePrice=price,location = location)
+            item = Item(ownermail=omail, start_date=sdate, end_date=edate, currentPrice=price, img1=img1,
+                        img2=img2, name=iname, profile=prof, tag=itag, description=disc, basePrice=price, location=location)
             item.save()
             return redirect("home")
         else:
-            return render(request,"notification2.html")
+            return render(request, "notification2.html")
     else:
-        return render(request,'addItem.html')
-    
-    
+        return render(request, 'addItem.html')
+
+
 @login_required(login_url='login')
 def biditem(request):
-    id=request.GET['id']
+    id = request.GET['id']
     item = Item.objects.get(id=id)
-    lstatus="live"
+    lstatus = "live"
 
-    if item.status ==lstatus:
-        return render(request,"biditem.html",{'item':item})
+    if item.status == lstatus:
+        return render(request, "biditem.html", {'item': item})
     else:
         return redirect("home")
-    
+
 
 # function to validate whether a bid was placed correctly and then to inform the seller
 
@@ -52,10 +55,13 @@ def biditem(request):
 def successfullBid(request):
 
     value = request.GET.get('bidrs')
-    valueINT = int(value) 
+    valueINT = int(value)
     iid = request.GET.get('iid')
     bidder = request.user
+
     bidderEmail = bidder.email
+    itemMail = Item.objects.get(id=iid).ownermail
+    itemUser = CustomUser.objects.get(email=itemMail)
 
     item_obj = Item.objects.get(id=iid)
     cpINT = int(item_obj.currentPrice)
@@ -63,13 +69,16 @@ def successfullBid(request):
     itemOwnerEmail = item_obj.ownermail
 
     if bidderEmail == itemOwnerEmail:
-        return render(request,"notification.html") # will give an error notification, as seller cannot bid on their own item
+        # will give an error notification, as seller cannot bid on their own item
+        return render(request, "notification.html")
     else:
         mail = item_obj.ownermail
-        subject = "The Dorm Room Dealer"  
-        msg     = "Your item - " + item_obj.name + " was bidded by "+ bidder.email + ", at Rs" + value + "."
-        to      = mail  
-        res     = send_mail(subject, msg, "notyourregularbidmaster@gmail.com", [to])
+        subject = "The Dorm Room Dealer"
+        msg = "Your item - " + item_obj.name + " was bidded by " + \
+            bidder.email + ", at Rs" + value + "."
+        to = mail
+        res = send_mail(
+            subject, msg, "notyourregularbidmaster@gmail.com", [to])
 
         Item.objects.filter(id=iid).update(currentPrice=str(valueINT+1))
         Item.objects.filter(id=iid).update(highest_bidder=bidder.id)
