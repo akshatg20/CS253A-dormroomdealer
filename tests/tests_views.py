@@ -143,7 +143,7 @@ class RegisterViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Check if the error message is displayed
-        self.assertContains(response, "User with this Email already exits")
+        self.assertContains(response, "User with this Email already exists")
 
 
 class LogoutViewTestCase(TestCase):

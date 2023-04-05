@@ -48,7 +48,7 @@ def register(request):
         hall = request.POST['hall']
         if p1 == p2:
             if CustomUser.objects.filter(email=mail).exists():
-                messages.info(request, "User with this Email already exits")
+                messages.info(request, "User with this Email already exists")
                 return redirect('register')
             elif CustomUser.objects.filter(username=username).exists():
                 messages.info(request, "Username Taken")
@@ -57,7 +57,7 @@ def register(request):
                 user = CustomUser.objects.create_user(
                     first_name=firstname, last_name=lastname, email=mail, password=p1, username=username)
                 user.add_notification(
-                    "Congratulations notification implemented!")
+                    "Succesfull Registration!")
                 user.save()
                 obj = Detail(username=username, contact=contact,
                              profile=profile, hall=hall)
@@ -134,7 +134,7 @@ def sendMail(request):
             winnerEmail = user_obj.email
             winnerUsername = user_obj.username
             CustomUser.add_notification(
-                "Congratulations notification implemented!")
+                "Succesfull Registration!")
 
             # -----------------------------------------------------------
             obj = Detail.objects.get(username=winnerUsername)
