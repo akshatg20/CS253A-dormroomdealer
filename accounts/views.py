@@ -247,11 +247,15 @@ def home(request):
 
     # paginating
     paginator = Paginator(items, 6)  # Show 6 products per page.
-
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, "home.html", {'page_obj': page_obj, 'items': itemsfuture, 'show_notifications_link': show_notifications_link, "num_notifications": num_notifications})
+    paginator2 = Paginator(itemsfuture,6)   # Show 6 products per page.
+    page_number = request.GET.get('page')
+    page_obj2 = paginator2.get_page(page_number)
+
+
+    return render(request, "home.html", {'page_obj': page_obj, 'page_obj2': page_obj2, 'show_notifications_link': show_notifications_link, "num_notifications": num_notifications})
 
 
 # function to implement notifications from the Customuser requesting for notifications. Show most recent 10 notifications
@@ -372,7 +376,34 @@ def dashboard(request):
     pitem = Item.objects.filter(ownermail=mail).filter(status="past")
     litem = Item.objects.filter(ownermail=mail).filter(status="live")
     fitem = Item.objects.filter(ownermail=mail).filter(status="future")
-    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddedlive": biddedlive, "biddedpast": biddedpast, "details": details, "contact": contact, "profile": profile, "hall": hall, "show_notifications_link": show_notifications_link})
+
+    # paginating live items
+    paginator = Paginator(litem,4)  # Show 4 products per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # paginating future items
+    paginator2 = Paginator(fitem, 4)
+    page_number = request.GET.get('page')
+    page_obj2 = paginator2.get_page(page_number)
+
+    # paginating past items
+    paginator3 = Paginator(pitem, 4)
+    page_number = request.GET.get('page')
+    page_obj3 = paginator3.get_page(page_number)
+
+    # paginating biddedlive items
+    paginator4 = Paginator(biddedlive, 4)
+    page_number = request.GET.get('page')
+    page_obj4 = paginator4.get_page(page_number)
+
+    # paginating biddedpast items
+    paginator5 = Paginator(biddedpast, 4)
+    page_number = request.GET.get('page')
+    page_obj5 = paginator5.get_page(page_number)
+
+
+    return render(request, "dashboard.html", {'page_obj':page_obj,'page_obj2':page_obj2, 'page_obj3':page_obj3, 'page_obj4':page_obj4, 'page_obj5':page_obj5, "details": details, "contact": contact, "profile": profile, "hall": hall, "show_notifications_link": show_notifications_link})
 
 
 # function to allow user to edit their details

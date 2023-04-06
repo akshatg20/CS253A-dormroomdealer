@@ -199,13 +199,12 @@
     </div>
 </div>
 
-
 <div class="container">
     <h2 class="text-center my-4">Future Auctions</h2>
     <hr>
     </hr>
     <div class="row justify-content-center">
-        {% for i in items %}
+        {% for i in page_obj2 %}
         <div class="col-md-4 mb-4">
             <div class="card">
                 <img class="card-img-top" id="item-image" src="{{ i.profile.url }}" alt="{{ i.name }}">
