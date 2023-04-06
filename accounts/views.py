@@ -235,7 +235,10 @@ def home(request):
     page_obj = paginator.get_page(page_number)
 
     # adding future auctions
-    itemsfuture = Item.objects.filter(status="future")
+    if category != "All categories" and category != None:
+        itemsfuture = Item.objects.filter(status="future").filter(tag=category)
+    else:
+        itemsfuture = Item.objects.filter(status = "future")
 
     return render(request, "home.html", {'page_obj': page_obj, 'items': itemsfuture, 'show_notifications_link': show_notifications_link,"num_notifications":num_notifications})
 
