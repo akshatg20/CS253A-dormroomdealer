@@ -10,6 +10,7 @@ from django.utils import timezone
 import datetime
 from django.core.paginator import Paginator
 from .models import CustomUser
+from django.db.models import F
 
 # function to implement the login facility
 
@@ -185,15 +186,15 @@ def sendMail(request):
 def home(request):
 
     show_notifications_link = True
-    user= request.user
+    user = request.user
     notifications = user.notifications.all()
+
     # check for how many notifications have field seen false
-    num_notifications =0
+    num_notifications = 0
     for notification in notifications:
         if notification.seen == False:
             num_notifications = num_notifications+1
-            # notification.save()
-    #  = len(notifications)
+
     # creating a category search on the top of the home page
     if request.method == "POST":
         category = request.POST.get('category')
@@ -225,8 +226,24 @@ def home(request):
 
     if category != "All categories" and category != None:
         items = Item.objects.filter(status="live").filter(tag=category)
+        itemsfuture = Item.objects.filter(status="future").filter(tag=category)
     else:
         items = Item.objects.filter(status="live")
+        itemsfuture = Item.objects.filter(status="future")
+
+    sort_by = request.GET.get("sort", "l2h")    
+    if sort_by == "l2h":
+       items = items.order_by('currentPrice')
+       itemsfuture = itemsfuture.order_by('currentPrice')
+    elif sort_by == "h2l":
+       items = items.order_by('-currentPrice')
+       itemsfuture = itemsfuture.order_by('-currentPrice')
+    elif sort_by == "sdate":
+        items = items.order_by('start_date')
+        itemsfuture = itemsfuture.order_by('start_date')    
+    elif sort_by == "edate":
+        items = items.order_by('end_date')
+        itemsfuture = itemsfuture.order_by('end_date') 
 
     # paginating
     paginator = Paginator(items, 6)  # Show 6 products per page.
@@ -234,17 +251,10 @@ def home(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # adding future auctions
-    if category != "All categories" and category != None:
-        itemsfuture = Item.objects.filter(status="future").filter(tag=category)
-    else:
-        itemsfuture = Item.objects.filter(status = "future")
+    return render(request, "home.html", {'page_obj': page_obj, 'items': itemsfuture, 'show_notifications_link': show_notifications_link, "num_notifications": num_notifications})
 
-    return render(request, "home.html", {'page_obj': page_obj, 'items': itemsfuture, 'show_notifications_link': show_notifications_link,"num_notifications":num_notifications})
 
 # function to implement notifications from the Customuser requesting for notifications. Show most recent 10 notifications
-
-
 @login_required(login_url='login')
 def notifications(request):
     user = request.user
@@ -268,9 +278,7 @@ def notifications(request):
 @login_required(login_url='login')
 def dashboard(request):
 
-
-
-    show_notifications_link= False
+    show_notifications_link = False
 
     # Checking if seller stopped the auction beforehand
     if request.method == 'POST':
@@ -364,13 +372,13 @@ def dashboard(request):
     pitem = Item.objects.filter(ownermail=mail).filter(status="past")
     litem = Item.objects.filter(ownermail=mail).filter(status="live")
     fitem = Item.objects.filter(ownermail=mail).filter(status="future")
-    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddedlive": biddedlive, "biddedpast": biddedpast, "details": details, "contact": contact, "profile": profile, "hall": hall, "show_notifications_link":show_notifications_link})
+    return render(request, "dashboard.html", {'pitem': pitem, 'litem': litem, 'fitem': fitem, "biddedlive": biddedlive, "biddedpast": biddedpast, "details": details, "contact": contact, "profile": profile, "hall": hall, "show_notifications_link": show_notifications_link})
 
 
 # function to allow user to edit their details
 @login_required(login_url='login')
 def edit_profile(request):
-   
+
     if request.method == 'POST':
         # update the user's details
         user = request.user

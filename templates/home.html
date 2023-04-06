@@ -77,6 +77,10 @@
         opacity: 0.5;
     }
 
+    .sort-by-container {
+        margin-left: -15px;
+    }
+
     /* Responsive styles */
 
     @media (max-width: 767px) {
@@ -158,6 +162,20 @@
         <button type="submit">Search</button>
     </form>
 
+
+    <div class="col-auto sort-by-container">
+        <form method="GET">
+            <label for="filters">SORT PRODUCT BY:</label>
+            <select class="filter_by" name="sort">
+                <option value="sdate">Start Date</option>
+                <option value="edate">End Date</option>
+                <option value="l2h">Price Ascending</option>
+                <option value="h2l">Price Descending</option> 
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+    </div>
+
     <h2 class="text-center my-4">Live Bids</h2>
     <hr>
     </hr>
@@ -171,6 +189,7 @@
                         <h5 class="card-title">Product : {{ i.name }}</h5>
                         <h5 class="mb-0">Current Price: ₹ {{ i.currentPrice }}</h5>
                         <h5 class="mb-0">Hall: {{ i.location }}</h5>
+                        <!-- <h5 class="mb-0">Auction ends on: {{ i.end_date }}</h5> -->
                     </div>
                     <a href="items/biditem?id={{ i.id }}" class="btn btn-primary">View and Bid</a>
                 </div>
@@ -180,23 +199,6 @@
     </div>
 </div>
 
-<!-- <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-        <a href="?page=1">&laquo; First</a>
-        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">Next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
-        {% endif %}
-    </span>
-</div> -->
 
 <div class="container">
     <h2 class="text-center my-4">Future Auctions</h2>
