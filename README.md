@@ -1,7 +1,6 @@
 # drd
 This repository is implementation of the course project CS253.
 # Requirements
-python version >= 3.6.3
 ```python
 pip install django
 pip install Pillow
