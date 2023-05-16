@@ -13,3 +13,7 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+# Guides for running the application
+
+In settings.py,
+Replace the EMAIL with your own email-id
