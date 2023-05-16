@@ -78,7 +78,7 @@ def successfullBid(request):
             bidder.email + ", at Rs" + value + "."
         to = mail
         res = send_mail(
-            subject, msg, "dormroomdealer@gmail.com", [to])
+            subject, msg, "dummy-email-id", [to])           # put up your own email-id
         itemUser.add_notification(msg)
         Item.objects.filter(id=iid).update(currentPrice=str(valueINT+1))
         Item.objects.filter(id=iid).update(highest_bidder=bidder.id)
