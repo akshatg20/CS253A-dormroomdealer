@@ -17,8 +17,9 @@ python manage.py runserver
 
 In settings.py you will find at line 136-137
 
-EMAIL_HOST_USER = 'dummy-email-id'                      # put up your own email id here
-EMAIL_HOST_PASSWORD = "dummy-email-app-password"        # put up your own app-generated password
+EMAIL_HOST_USER = 'dummy-email-id'                                  # put up your own email id here
+
+EMAIL_HOST_PASSWORD = "dummy-email-app-password"                    # put up your own app-generated password
 
 The same email id also needs to be substituted at the following places:
 
