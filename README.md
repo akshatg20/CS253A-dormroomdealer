@@ -1,5 +1,5 @@
 # drd
-This repository is implementation of the course project CS253.
+This repository is the implementation of the course project CS253.
 # Requirements
 ```python
 pip install django
@@ -15,5 +15,10 @@ python manage.py runserver
 ```
 # Guides for running the application
 
-In settings.py,
-Replace the EMAIL with your own email-id
+In settings.py you will find at line 136-137
+
+EMAIL_HOST_USER = 'dummy-email-id'                      # put up your own email id here
+EMAIL_HOST_PASSWORD = "dummy-email-app-password"        # put up your own app-generated password
+
+The same email id also needs to be substituted at the following places:
+
