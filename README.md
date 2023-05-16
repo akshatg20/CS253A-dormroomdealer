@@ -26,3 +26,14 @@ The same email id also needs to be substituted at the following places:
 In accounts/views.py ---> At lines 70, 159, 172, 328 and 342.
 
 In items/views.py ----> At line 81.
+
+# App-generated Password
+
+1. Go to your Google Account.
+2. Select Security
+3. Under "Signing in to Google," select 2-Step Verification.
+4. At the bottom of the page, select App passwords.
+5. Enter a name that helps you remember where you’ll use the app password.
+6. Select Generate.
+7. To enter the app password, follow the instructions on your screen. The app password is the 16-character code that generates on your device.
+8. Select Done.
