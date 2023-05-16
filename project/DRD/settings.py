@@ -133,8 +133,8 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'dormroomdealer@gmail.com'
-EMAIL_HOST_PASSWORD = "dcaibwladydbhriy"
+EMAIL_HOST_USER = 'dummy-email-id'                      # put up your own email id here
+EMAIL_HOST_PASSWORD = "dummy-email-app-password"        # put up your app-generated password
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
