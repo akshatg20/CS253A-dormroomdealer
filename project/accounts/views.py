@@ -67,7 +67,7 @@ def register(request):
                 msg = "Succesfull Registration!"
                 to = mail
                 res = send_mail(
-                    subject, msg, "notyourregularbidmaster@gmail.com'", [to])
+                    subject, msg, "dormroomdealer@gmail.com", [to])
                 if res == 1:
                     return redirect('/')
                 # else:
@@ -156,7 +156,7 @@ def sendMail(request):
             user_obj.add_notification(msg)
             to = winnerEmail
             res = send_mail(
-                subject, msg, "notyourregularbidmaster@gmail.com", [to])
+                subject, msg, "dormroomdealer@gmail.com", [to])
             if res == 1:
                 print("Mail sent")
             else:
@@ -169,7 +169,7 @@ def sendMail(request):
             itemUserobj.add_notification(msg)
             to = i.ownermail
             res = send_mail(
-                subject, msg, "notyourregularbidmaster@gmail.com", [to])
+                subject, msg, "dormroomdealer@gmail.com", [to])
             if res == 1:
                 print("Mail sent")
             else:
@@ -325,7 +325,7 @@ def dashboard(request):
             user_obj.add_notification(msg)
             to = winnerEmail
             res = send_mail(
-                subject, msg, "notyourregularbidmaster@gmail.com", [to])
+                subject, msg, "dormroomdealer@gmail.com", [to])
             if res == 1:
                 print("Mail sent")
             else:
@@ -339,7 +339,7 @@ def dashboard(request):
             itemUserobj.add_notification(msg)
             to = item.ownermail
             res = send_mail(
-                subject, msg, "notyourregularbidmaster@gmail.com", [to])
+                subject, msg, "dormroomdealer@gmail.com", [to])
             if res == 1:
                 print("Mail sent")
             else:
