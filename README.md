@@ -8,7 +8,7 @@ pip install Pillow
 # Installation
 ```bash
 git clone git@github.com:CS253-The-Dorm-Room-Dealer/dormroomdealer.git # ssh
-cd dormroomdealer
+cd dormroomdealer/project/
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
